@@ -70,3 +70,33 @@ for (let i = 1; i <= maxImages; i++) {
   }
 }
 
+// Add videos to the gallery
+const videoExtensions = ['.mp4', '.webm', '.ogg'];
+
+for (let i = 1; i <= maxImages; i++) {
+  let foundVideo = false;
+
+  for (const ext of videoExtensions) {
+    const link = document.createElement('a');
+    link.href = `${folder}${prefix}${i}${ext}`;
+    const video = document.createElement('video');
+    video.src = `${folder}${prefix}${i}${ext}`;
+    video.controls = true;
+
+    video.onloadedmetadata = () => {
+      if (!foundVideo) {
+        video.style.flex = '1 1 300px';
+        video.style.maxWidth = 'calc(100% - 20px)';
+        video.style.borderRadius = '8px';
+        video.style.objectFit = 'cover';
+        link.appendChild(video);
+        gallery.appendChild(link);
+        foundVideo = true;
+      }
+    }
+
+    video.onerror = () => {
+      // optional: console.log(`${folder}${prefix}${i}${ext} not found.`);
+    }
+  }
+}
