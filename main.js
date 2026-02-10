@@ -11,6 +11,10 @@ function explore_press() {
     document.location = 'explore.html'
 }
 
+function cards_press() {
+    document.location = 'cards.html'
+}
+
 function fav_press() {
     document.location = 'favorites.html'
 }
